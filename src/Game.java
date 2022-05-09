@@ -10,7 +10,10 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	
 	private BufferedImage back; 
 	private int key,  x, y;
-	private ImageIcon lucki, background;
+	private ImageIcon weapon, background;
+	public boolean weapon1, weapon2;
+
+
 	
 	
 	
@@ -22,6 +25,9 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		key =-1; 
 		x=0;
 		y=0;
+		weapon1=true;
+		weapon2=false;
+		
 	}
 
 	
@@ -55,18 +61,24 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		Graphics g2d = back.createGraphics();
 	
 		g2d.clearRect(0,0,getSize().width, getSize().height);
-		background = new ImageIcon("Studio.jpg");
+		background = new ImageIcon("background comp sci game.jpg");
 		g2d.drawImage(background.getImage(),0,0,getWidth(),getHeight(),this);
-		lucki = new ImageIcon("Luckibg.png");
-		g2d.drawImage(lucki.getImage(),x,y,getWidth(),getHeight(),this);
-		g2d.setFont(new Font("BROADWAY",Font.PLAIN, 50));
-		g2d.setColor(Color.WHITE);
-		g2d.drawString("Lucki the GOAT",x,y);
+		
+		
+		if (weapon1 == true) {
+			weapon = new ImageIcon("TN_viking-weapon-clipart-removebg-preview.png");
+			g2d.drawImage(weapon.getImage(),x,y,200,200,this);
+		}
+		
+		if (weapon2 == true) {
+			weapon = new ImageIcon("spas-12-mw2-fps-football-gun-shooter-3d-2018-115636114214p3idikd3r-removebg-preview.png");
+			g2d.drawImage(weapon.getImage(),x,y,200,200,this);
+		}
 
 		twoDgraph.drawImage(back, null, 0, 0);
 
 	}
-
+	
 	
 
 
@@ -88,6 +100,15 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		key= e.getKeyCode();
 		System.out.println(key);
 		
+		if (e.getKeyCode() == 49) {
+			weapon1=true;
+			weapon2=false;
+		}
+		
+		if (e.getKeyCode() == 50) {
+			weapon2=true;
+			weapon1=false;
+		} 
 		
 	}
 
