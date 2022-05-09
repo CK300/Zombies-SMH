@@ -11,7 +11,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	private BufferedImage back; 
 	private int key,  x, y;
 	private ImageIcon weapon, background;
-	public boolean weapon1, weapon2;
+	public boolean weapon1, weapon2; 
 
 
 	
