@@ -10,7 +10,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	
 	private BufferedImage back; 
 	private int key,  x, y;
-	private ImageIcon weapon, background, startimage;
+	private ImageIcon weapon, background;
 	public boolean weapon1, weapon2, startscreen, gamescreen; 
 
 
@@ -64,7 +64,22 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		Graphics g2d = back.createGraphics();
 		g2d.clearRect(0,0,getSize().width, getSize().height);
 		
+		if (startscreen = true) {
+			background = new ImageIcon("Screenshot 2022-05-11 151516.jpg");
+			g2d.drawImage(background.getImage(),0,0,getWidth(),getHeight(),this);
+			g2d.setColor(Color.white);
+			g2d.setFont(new Font("Forte", Font.PLAIN, 56));
+			g2d.drawString("ZOMBIES SMH", getWidth()/2, getHeight()/2);
+			g2d.setFont(new Font("Forte", Font.PLAIN, 24));
+			g2d.drawString("Click Space to Start", getWidth()/2, getHeight()-500);
+		}
 		
+		if (gamescreen = true) {
+			background = new ImageIcon("background comp sci game.jpg");
+			g2d.drawImage(background.getImage(),0,0,getWidth(),getHeight(),this);
+			weapon1=true;
+			startscreen=false;
+		}
 		
 		if (weapon1 == true) {
 			weapon = new ImageIcon("TN_viking-weapon-clipart-removebg-preview.png");
@@ -76,23 +91,9 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 			g2d.drawImage(weapon.getImage(),x,y,200,200,this);
 		}
 		
-		if (startscreen = true) {
-			startimage = new ImageIcon("Screenshot 2022-05-11 151516.jpg");
-			g2d.drawImage(startimage.getImage(),0,0,getWidth(),getHeight(),this);
-			g2d.setColor(Color.white);
-			g2d.setFont(new Font("Forte", Font.PLAIN, 56));
-			g2d.drawString("ZOMBIES SMH", getWidth()/2, getHeight()/2);
-			g2d.setColor(Color.white);
-			g2d.setFont(new Font("Forte", Font.PLAIN, 56));
-			g2d.drawString("Click Space to Start", getWidth()/2, getHeight()-500);
-		}
+		
 			
-		if (gamescreen = true) {
-			background = new ImageIcon("background comp sci game.jpg");
-			g2d.drawImage(background.getImage(),0,0,getWidth(),getHeight(),this);
-			weapon1=true;
-			startscreen=false;
-		}
+		
 		
 
 		twoDgraph.drawImage(back, null, 0, 0);
