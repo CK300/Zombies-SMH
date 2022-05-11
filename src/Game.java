@@ -62,7 +62,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		
 
 		Graphics g2d = back.createGraphics();
-	
+		g2d.clearRect(0,0,getSize().width, getSize().height);
 		
 		
 		
@@ -88,7 +88,6 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		}
 			
 		if (gamescreen = true) {
-			g2d.clearRect(0,0,getSize().width, getSize().height);
 			background = new ImageIcon("background comp sci game.jpg");
 			g2d.drawImage(background.getImage(),0,0,getWidth(),getHeight(),this);
 			weapon1=true;
