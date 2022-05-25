@@ -64,7 +64,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 
 		Graphics g2d = back.createGraphics();
 		g2d.clearRect(0,0,getSize().width, getSize().height);
-		
+		Player play = new Player();
 		
 		if (startscreen == true) {
 			background = new ImageIcon("Screenshot 2022-05-11 151516.jpg");
@@ -79,11 +79,11 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 			mapimage = new ImageIcon("map2.jpg");
 			g2d.drawImage(mapimage.getImage(),1000,700,300,300,this);
 			if(homeMusic) {
-				Player play = new Player();
+				
 				play.playmusic("radioerror.wav");
 				homeMusic=false;
 			} else if (gamescreen==true || gamescreen2==true) {
-				Player play = new Player();
+				
 				play.playmusic("stop");
 			}
 		
