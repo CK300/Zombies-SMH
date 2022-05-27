@@ -150,17 +150,21 @@ public void movement() {
 		case 3:
 			heart = new ImageIcon("heart.png");	
 			g2d.drawImage(heart.getImage(),50,50,100,100,this);
-
+			g2d.setColor(Color.white);
+			g2d.drawString("x3",150,100);
+			break;
 		case 2:
 			heart = new ImageIcon("heart.png");	
 			g2d.drawImage(heart.getImage(),50,50,100,100,this);
-			
+			g2d.setColor(Color.white);
+			g2d.drawString("x2",150,100);
+			break;
 		
 		case 1:
 			heart = new ImageIcon("heart.png");	
 			g2d.drawImage(heart.getImage(),50,50,100,100,this);
 			g2d.setColor(Color.white);
-			g2d.drawString("x3",150,100);
+			g2d.drawString("x1",150,100);
 			
 		}
 	}
