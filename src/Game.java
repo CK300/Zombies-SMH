@@ -9,11 +9,12 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 
 	
 	private BufferedImage back; 
-	private int key,  x, y;
-	private ImageIcon weapon, background,map, mapimage, finish, weaponImage;
-	public boolean startscreen, gamescreen, gamescreen2, homeMusic;
+	private int key,  x, y, lives;
+	private ImageIcon weapon, background,map, mapimage, finish, weaponImage, endline, heart;
+	public boolean startscreen, gamescreen, gamescreen2;
 	private Weapons wobject;
-	
+	private Boolean homeMusic, p1up, p1down,p1left,p1right;
+	private Zombies player;
 
 	
 	
@@ -30,10 +31,31 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		gamescreen=false;
 		gamescreen2=false;
 		homeMusic=true;
-		wobject = new Weapons(250,250,2,2);
+		wobject = new Weapons(1449,0,8,8);
 		weaponImage = new ImageIcon(wobject.getWeaponImage());
+		player= new Zombies (0, 800);
+		p1up=false;
+		p1down=false;
+		p1left=false;
+		p1right=false;
+		lives=3;
 	}
 
+public void movement() {
+		
+		if (p1up) {
+			player.moveUp();
+		}
+		if (p1down) {
+			player.moveDown();
+		}
+		if (p1left) {
+			player.moveLeft();
+		}
+		if (p1right) {
+			player.moveRight();
+		}
+	}
 	
 	
 	public void run()
@@ -66,6 +88,9 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		g2d.clearRect(0,0,getSize().width, getSize().height);
 		Player play = new Player();
 		
+		
+		
+		
 		if (startscreen == true) {
 			background = new ImageIcon("Screenshot 2022-05-11 151516.jpg");
 			g2d.drawImage(background.getImage(),0,0,getWidth(),getHeight(),this);
@@ -92,27 +117,55 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		if (gamescreen == true) {
 			map = new ImageIcon("background comp sci game.jpg");
 			g2d.drawImage(map.getImage(),0,0,getWidth(),getHeight(),this);
+			drawLives(g2d);
 			wobject.move();
 			g2d.drawImage(weaponImage.getImage(),wobject.getX(),wobject.getY(),wobject.getW(),wobject.getH(),this);
-			
+			endline = new ImageIcon("finish line.png");
+			g2d.drawImage(endline.getImage(),1600,0,1700,1500,this);
+			g2d.drawImage(player.getZombieImage().getImage(),player.getX(),player.getY(),player.getW(),player.getH(),this);
 		}
 		
 		if (gamescreen2 == true) {
 			map = new ImageIcon("map2.jpg");
 			g2d.drawImage(map.getImage(),0,0,getWidth(),getHeight(),this);
+			drawLives(g2d);
 			wobject.move();
 			g2d.drawImage(weaponImage.getImage(),wobject.getX(),wobject.getY(),wobject.getW(),wobject.getH(),this);
-		
+			endline = new ImageIcon("finish line.png");
+			g2d.drawImage(endline.getImage(),1600,0,1700,1500,this);
+			g2d.drawImage(player.getZombieImage().getImage(),player.getX(),player.getY(),player.getW(),player.getH(),this);
 		}
 	
-	
 		
+		movement();
 		
 		twoDgraph.drawImage(back, null, 0, 0);
 
 	}
 	
+	public void drawLives(Graphics g2d) 
+	{
+		switch(lives) {
+	
+		case 3:
+			heart = new ImageIcon("heart.png");	
+			g2d.drawImage(heart.getImage(),50,50,100,100,this);
+
+		case 2:
+			heart = new ImageIcon("heart.png");	
+			g2d.drawImage(heart.getImage(),50,50,100,100,this);
+			
 		
+		case 1:
+			heart = new ImageIcon("heart.png");	
+			g2d.drawImage(heart.getImage(),50,50,100,100,this);
+			g2d.setColor(Color.white);
+			g2d.drawString("x3",150,100);
+			
+		}
+	}
+	
+	
 
 
 	@Override
@@ -131,7 +184,18 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		
 		key= e.getKeyCode();
 		System.out.println(key);
-		
+		if (key==87) {
+			p1up=true;
+		}
+		if (key==83) {
+			p1down=true;
+		}
+		if (key==65) {
+			p1left=true;
+		}
+		if (key==68) {
+			p1right=true;
+		}
 		
 	
 		
@@ -142,7 +206,18 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-	
+		if (e.getKeyCode()==87) {
+			p1up=false;
+		}
+		if (e.getKeyCode()==83) {
+			p1down=false;
+		}
+		if (e.getKeyCode()==65) {
+			p1left=false;
+		}
+		if (e.getKeyCode()==68) {
+			p1right=false;
+		}
 		
 		
 		
