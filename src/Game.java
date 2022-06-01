@@ -241,8 +241,8 @@ public void movement() {
 			p1right=true;
 		}
 		if (key==32) {
-			wobject.setDX(wobject.getDX()+(int)(( Math.random() * 14-10)+10));
-			wobject.setDY(wobject.getDY()+(int)(( Math.random() * 14-10)+10));
+			wobject.setDX(wobject.getDX()+12);
+			wobject.setDY(wobject.getDY()+12);
 		}
 			
 		
