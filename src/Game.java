@@ -10,7 +10,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	
 	private BufferedImage back; 
 	private int key,  x, y, lives;
-	private ImageIcon weapon, background,map, mapimage, finish, weaponImage, endline, heart;
+	private ImageIcon  background,map, mapimage,  weaponImage, endline, heart;
 	public boolean startscreen, gamescreen, gamescreen2;
 	private Weapons wobject;
 	private Boolean homeMusic, p1up, p1down,p1left,p1right;
@@ -31,7 +31,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		gamescreen=false;
 		gamescreen2=false;
 		homeMusic=true;
-		wobject = new Weapons(1449,0,8,8);
+		wobject = new Weapons(1449,(int)(( Math.random() * 768)+1),0,0);
 		weaponImage = new ImageIcon(wobject.getWeaponImage());
 		player= new Zombies (0, 800);
 		p1up=false;
@@ -144,6 +144,10 @@ public void movement() {
 		if (lives==0) {
 			loseScreen(g2d);
 		}
+		
+		if(player.getX()>=1500) {
+			winScreen(g2d);
+		}
 		twoDgraph.drawImage(back, null, 0, 0);
 
 	}
@@ -179,17 +183,30 @@ public void movement() {
 		g2d.clearRect(0,0,getSize().width, getSize().height);
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect(0, 0, 10000, 10000);
-		g2d.setColor(Color.white);
+		g2d.setColor(Color.red);
 		g2d.setFont(new Font("Forte", Font.PLAIN, 50));
-		g2d.drawString("You Lost", 700, 500);
+		g2d.drawString("You Lost", 850, 500);
 		
 	}
+	
+	public void winScreen(Graphics g2d) {
+		g2d.clearRect(0,0,getSize().width, getSize().height);
+		g2d.setColor(Color.BLACK);
+		g2d.fillRect(0, 0, 10000, 10000);
+		g2d.setColor(Color.white);
+		g2d.setFont(new Font("Forte", Font.PLAIN, 50));
+		g2d.drawString("You've Escaped!", 800, 500);
+		
+	}
+	
+	
 
 	
 	public void collision() {
 		if(player.Collision(wobject)&& lives>0) {
 			lives--;
 			player.reset();
+			wobject.reset();
 			
 		}
 	}
@@ -223,8 +240,11 @@ public void movement() {
 		if (key==68) {
 			p1right=true;
 		}
-		
-	
+		if (key==32) {
+			wobject.setDX(wobject.getDX()+(int)(( Math.random() * 14-10)+10));
+			wobject.setDY(wobject.getDY()+(int)(( Math.random() * 14-10)+10));
+		}
+			
 		
 		
 	}
