@@ -10,7 +10,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	
 	private BufferedImage back; 
 	private int key,  x, y, lives;
-	private ImageIcon  background,map, mapimage,  weaponImage, endline, heart;
+	private ImageIcon  background,map, mapimage,  weaponImage, endline, heart, losescreen;
 	public boolean startscreen, gamescreen, gamescreen2;
 	private Weapons wobject;
 	private Boolean homeMusic, p1up, p1down,p1left,p1right;
@@ -180,10 +180,9 @@ public void movement() {
 	
 	
 	public void loseScreen(Graphics g2d) {
-		g2d.clearRect(0,0,getSize().width, getSize().height);
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(0, 0, 10000, 10000);
-		g2d.setColor(Color.red);
+		losescreen = new ImageIcon("blood splatter image.jpg");
+		g2d.drawImage(losescreen.getImage(),0,0,getWidth(),getHeight(),this);
+		g2d.setColor(Color.white);
 		g2d.setFont(new Font("Forte", Font.PLAIN, 50));
 		g2d.drawString("You Lost", 850, 500);
 		
