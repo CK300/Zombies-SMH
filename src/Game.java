@@ -138,7 +138,12 @@ public void movement() {
 	
 		
 		movement();
+		collision();
 		
+		
+		if (lives==0) {
+			loseScreen(g2d);
+		}
 		twoDgraph.drawImage(back, null, 0, 0);
 
 	}
@@ -170,6 +175,24 @@ public void movement() {
 	}
 	
 	
+	public void loseScreen(Graphics g2d) {
+		g2d.clearRect(0,0,getSize().width, getSize().height);
+		g2d.setColor(Color.BLACK);
+		g2d.fillRect(0, 0, 10000, 10000);
+		g2d.setColor(Color.white);
+		g2d.setFont(new Font("Forte", Font.PLAIN, 50));
+		g2d.drawString("You Lost", 700, 500);
+		
+	}
+
+	
+	public void collision() {
+		if(player.Collision(wobject)&& lives>0) {
+			lives--;
+			player.reset();
+			
+		}
+	}
 
 
 	@Override
