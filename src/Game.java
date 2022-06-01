@@ -15,7 +15,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	private Weapons wobject;
 	private Boolean homeMusic, p1up, p1down,p1left,p1right;
 	private Zombies player;
-
+	private Player play;
 	
 	
 	
@@ -30,7 +30,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		startscreen=true;
 		gamescreen=false;
 		gamescreen2=false;
-		homeMusic=true;
+		homeMusic=false;
 		wobject = new Weapons(1449,(int)(( Math.random() * 768)+1),0,0);
 		weaponImage = new ImageIcon(wobject.getWeaponImage());
 		player= new Zombies (0, 800);
@@ -39,6 +39,9 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 		p1left=false;
 		p1right=false;
 		lives=3;
+		play = new Player();
+		play.playmusic("radioerror.wav");
+		
 	}
 
 public void movement() {
@@ -86,8 +89,6 @@ public void movement() {
 
 		Graphics g2d = back.createGraphics();
 		g2d.clearRect(0,0,getSize().width, getSize().height);
-		Player play = new Player();
-		
 		
 		
 		
@@ -103,15 +104,8 @@ public void movement() {
 			g2d.drawImage(map.getImage(),600,700,300,300,this);
 			mapimage = new ImageIcon("map2.jpg");
 			g2d.drawImage(mapimage.getImage(),1000,700,300,300,this);
-			if(homeMusic) {
-				
-				play.playmusic("radioerror.wav");
-				homeMusic=false;
-			} else if (gamescreen==true || gamescreen2==true) {
-				
-				play.playmusic("stop");
-			}
-		
+			homeMusic=true;
+			
 		}
 		
 		if (gamescreen == true) {
@@ -123,6 +117,8 @@ public void movement() {
 			endline = new ImageIcon("finish line.png");
 			g2d.drawImage(endline.getImage(),1600,0,1700,1500,this);
 			g2d.drawImage(player.getZombieImage().getImage(),player.getX(),player.getY(),player.getW(),player.getH(),this);
+			play.playmusic("stop");
+			
 		}
 		
 		if (gamescreen2 == true) {
@@ -134,6 +130,8 @@ public void movement() {
 			endline = new ImageIcon("finish line.png");
 			g2d.drawImage(endline.getImage(),1600,0,1700,1500,this);
 			g2d.drawImage(player.getZombieImage().getImage(),player.getX(),player.getY(),player.getW(),player.getH(),this);
+			play.playmusic("stop");
+		
 		}
 	
 		
